@@ -25,7 +25,7 @@ const SubscriptionCard = ({
 	return (
 		<Pressable
 			onPress={onPress}
-			className={clsx("sub-card", expanded ? "sub-card-exanded" : "bg-card")}
+			className={clsx("sub-card", expanded ? "sub-card-expanded" : "bg-card")}
 			style={!expanded && color ? { backgroundColor: color } : undefined}
 		>
 			<View className="sub-head">

@@ -1,15 +1,21 @@
 import { tabs } from "@/constants/data";
 import { Image } from "react-native";
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { View } from "react-native";
 import clsx from "clsx";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { components, colors } from "@/constants/theme";
+import { authClient } from "@/lib/better-auth/client";
 
 const tabBar = components.tabBar;
 
-const TabLayout = () => {
+const TabLayout = async () => {
+	const { data: session, isPending } = authClient.useSession();
 	const insets = useSafeAreaInsets();
+
+	if (!session) {
+		router.push("/(auth)/sign-in");
+	}
 
 	const TabIcon = ({ focused, icon }: TabIconProps) => (
 		<View className="tabs-icon">
